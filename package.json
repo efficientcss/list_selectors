@@ -1,6 +1,6 @@
 {
-  "name": "list_selectors",
-  "version": "1.0.0-beta1",
+  "name": "@efficientcss/list-selectors",
+  "version": "1.0.0-beta-1",
   "description": "List CSS selectors in their original order.",
   "main": "list_selectors.mjs",
   "scripts": {
