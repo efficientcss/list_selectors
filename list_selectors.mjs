@@ -21,14 +21,31 @@ if (files.length === 0) {
 files.forEach((file, key, arr) => {
     const css = fs.readFileSync(file, 'utf-8');
     const filename = path.basename(file);
-    console.log('\n'+`${file}`+'\n');
+    console.log('\n' + `${file}` + '\n');
 
-    postcss.parse(css).walkRules(rule => {
-        console.log(`${rule.selector}`);
+    const root = postcss.parse(css);
+
+    const processNode = (node, indent = 0) => {
+        const indentation = ' '.repeat(indent);
+        if (node.type === 'rule') {
+            console.log(`${indentation}${node.selector}`);
+            node.nodes && node.nodes.forEach(childNode => processNode(childNode, indent + 2));
+        } else if (node.type === 'atrule') {
+            if (node.name === 'media') {
+                console.log(`\n${indentation}@media ${node.params} {`);
+            } else {
+                console.log(`${indentation}@${node.name} ${node.params} {`);
+            }
+            node.nodes && node.nodes.forEach(childNode => processNode(childNode, indent + 2));
+            console.log(`${indentation}}`);
+        }
+    };
+
+    root.nodes.forEach(node => {
+        processNode(node);
     });
 
-	if (key !== arr.length - 1) {
-		console.log('\n');
-	}
-
+    if (key !== arr.length - 1) {
+        console.log('\n');
+    }
 });
