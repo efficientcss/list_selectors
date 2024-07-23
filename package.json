@@ -1,7 +1,7 @@
 {
   "name": "@efficientcss/list-selectors",
   "version": "1.0.0-beta-1",
-  "description": "List CSS selectors in their original order.",
+  "description": "List CSS selectors and @media queries in their original order.",
   "main": "list_selectors.mjs",
   "scripts": {
     "test": "test"
@@ -14,7 +14,7 @@
   "author": "Marc-André Charpentier",
   "license": "ISC",
   "bin": {
-	  "listsel": "list_selectors.mjs"
+    "listsel": "list_selectors.mjs"
   },
   "dependencies": {
     "glob": "^10.3.10",
